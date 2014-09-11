@@ -1,0 +1,31 @@
+<%
+    hide = ['created_at', 'updated_at', 'id', 'complete']
+%>
+<div id="arps" class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+        <% @arps.first.attributes.each_pair do |attr, val| %>
+          <% if !hide.include? attr %>
+          <th>
+              <%= attr.upcase %>
+           </th>
+          <% end %>
+        <% end %>
+    </tr>
+    </thead>
+    <tbody>
+    <% @arps.each do |arp| %>
+        <tr class="<%= arp_row_class arp %>">
+        <% arp.attributes.each_pair do |attr, val| %>
+        <% if !hide.include? attr %>
+            <td>
+              <%=  val %>
+            </td>
+        <% end %>
+        <% end %>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

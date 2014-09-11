@@ -1,6 +1,6 @@
 ArpSpreadsheetGenerator::Application.routes.draw do
 
   root 'spreadsheets#index'
-  resources :spreadsheets
+  resources :spreadsheets, :arps, :mass_lines
 
 end

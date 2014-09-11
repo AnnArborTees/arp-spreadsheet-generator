@@ -1,0 +1,12 @@
+
+
+<div class="container">
+  <h1 class="page-header">Create a new Spreadsheet</h1>
+  <div class="form-group">
+    <%= bootstrap_form_for(@spreadsheet, layout: :horizontal) do |f| %>
+        <%= f.text_field :batch_id, placeholder: 'Batch ID#' %>
+        <%= f.file_field :file %>
+        <%= f.submit 'Create' %>
+    <% end %>
+  </div>
+</div>

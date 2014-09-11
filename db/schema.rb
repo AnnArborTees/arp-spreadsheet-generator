@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140911152418) do
+ActiveRecord::Schema.define(version: 20140911173908) do
 
   create_table "arps", force: true do |t|
     t.string   "file_location"
@@ -44,8 +44,10 @@ ActiveRecord::Schema.define(version: 20140911152418) do
     t.decimal  "white_ink_volume",     precision: 5, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "complete"
   end
 
+  add_index "arps", ["complete"], name: "index_arps_on_complete", using: :btree
   add_index "arps", ["platen"], name: "index_arps_on_platen", using: :btree
   add_index "arps", ["sku"], name: "index_arps_on_sku", using: :btree
 
@@ -54,6 +56,13 @@ ActiveRecord::Schema.define(version: 20140911152418) do
     t.integer  "batch_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.string   "state"
   end
+
+  add_index "spreadsheets", ["state"], name: "index_spreadsheets_on_state", using: :btree
 
 end

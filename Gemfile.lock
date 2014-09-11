@@ -30,7 +30,12 @@ GEM
       execjs
     bootstrap-sass (3.2.0.0)
       sass (~> 3.2)
+    bootstrap_form (2.1.1)
     builder (3.1.4)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.4)
+      climate_control (>= 0.0.3, < 1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -63,6 +68,11 @@ GEM
     minitest (4.7.5)
     multi_json (1.10.1)
     mysql2 (0.3.16)
+    paperclip (4.2.0)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
     polyglot (0.3.5)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -136,11 +146,13 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   bootstrap-sass (~> 3.2.0)
+  bootstrap_form
   coffee-rails (~> 4.0.0)
   inherited_resources
   jbuilder (~> 1.2)
   jquery-rails
   mysql2
+  paperclip (~> 4.2)
   rails (= 4.0.9)
   rspec-rails (~> 3.0.0)
   sass-rails (~> 4.0.2)

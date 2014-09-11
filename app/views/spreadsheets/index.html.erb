@@ -7,11 +7,24 @@
         <th>
             Batch #
         </th>
+        <th>
+            State
+        </th>
     </tr>
   </thead>
   <tbody>
+    <% @spreadsheets.each do |ss| %>
     <tr>
-
+        <td>
+          <%= ss.batch_id %>
+        </td>
+      <td>
+        <%= link_to ss.file_file_name, ss.file.url %>
+      </td>
+      <td>
+        <%= ss.state %>
+      </td>
     </tr>
+    <% end %>
   </tbody>
 </table>
