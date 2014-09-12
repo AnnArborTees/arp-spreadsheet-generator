@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate
     authenticate_or_request_with_http_basic do |username, password|
-      username == Figaro.env.basic_username && password ==  Figaro.env.basic_password
+      username == ENV['basic_username'] && password ==  ENV['basic_password']
     end
   end
 end

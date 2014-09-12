@@ -1,8 +1,8 @@
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 
-set :application, 'annarbortees-spree'
-set :repo_url, 'git@github.com:annarbortees/annarbortees-spree.git'
+set :application, 'arp-spreadsheet-generator'
+set :repo_url, 'git@github.com:annarbortees/arp-spreadsheet-generator.git'
 set :rvm_ruby_version, '2.1.1'
 
 # Default branch is :master
