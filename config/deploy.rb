@@ -1,11 +1,13 @@
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 
-set :application, 'my_app_name'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :application, 'annarbortees-spree'
+set :repo_url, 'git@github.com:annarbortees/annarbortees-spree.git'
+set :rvm_ruby_version, '2.1.1'
 
 # Default branch is :master
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+set :deploy_to, '/home/ubuntu/RailsApps/arp.softwearcrm.com'
 
 # Default deploy_to directory is /var/www/my_app
 # set :deploy_to, '/var/www/my_app'
@@ -23,7 +25,7 @@ set :repo_url, 'git@example.com:me/my_repo.git'
 # set :pty, true
 
 # Default value for :linked_files is []
-# set :linked_files, %w{config/database.yml}
+set :linked_files, %w{config/database.yml config/application.yml}
 
 # Default value for linked_dirs is []
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
@@ -39,8 +41,7 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
+      execute :touch, release_path.join('tmp/restart.txt')
     end
   end
 
