@@ -1,31 +1,99 @@
-<%
-    hide = ['created_at', 'updated_at', 'id', 'complete']
-%>
-<div id="arps" class="table-responsive">
-  <table class="table table-hover">
-    <thead>
-    <tr>
-        <% @arps.first.attributes.each_pair do |attr, val| %>
-          <% if !hide.include? attr %>
-          <th>
-              <%= attr.upcase %>
-           </th>
-          <% end %>
-        <% end %>
-    </tr>
-    </thead>
-    <tbody>
-    <% @arps.each do |arp| %>
-        <tr class="<%= arp_row_class arp %>">
-        <% arp.attributes.each_pair do |attr, val| %>
-        <% if !hide.include? attr %>
-            <td>
-              <%=  val %>
-            </td>
-        <% end %>
-        <% end %>
+<h1 class="page-header">ARP/AR3s</h1>
+
+<% if @arps.empty? %>
+    <div class="jumbotron">
+        <h1>There are No ARPs that meet your search criteria</h1>
+        <p>Try searching with something different</p>
+    </div>
+<% else %>
+  <div id="arps" class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Get Data</th>
+          <th>SKU & File</th>
+          <th>Platen</th>
+          <th>ARP</th>
+          <th>AR3</th>
+          <th>Machine Settings</th>
+          <th>Print Settings</th>
+          <th>Image Settings</th>
+          <th>Transparency</th>
+          <th>Pretreat Settings</th>
         </tr>
-    <% end %>
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+      <% @arps.each do |arp| %>
+
+        <tr class="<%= arp_row_class arp %>">
+          <td>
+            <%= link_to 'Mass Line', edit_arp_path(arp, source: 'mass_line'), class: 'btn btn-primary' %>
+          </td>
+          <td>
+            <dl>
+              <dt>SKU</dt> <dd><%= arp.sku %></dd>
+              <dt>File</dt> <dd><%= arp.file_location %></dd>
+            </dl>
+
+          </td>
+          <td>
+            <%= arp.platen %>
+          </td>
+          <td>
+            <dl>
+              <dt>Mask</dt> <dd><%= arp.maskp %></dd>
+              <dt>Highlight</dt> <dd><%= arp.highlightp %></dd>
+            </dl>
+          </td>
+          <td>
+            <dl>
+              <dt>Mask</dt> <dd><%= arp.mask3 %></dd>
+              <dt>Highlight</dt> <dd><%= arp.highlight3 %></dd>
+            </dl>
+          </td>
+          <td>
+            <dl>
+              <dt>Multi Pass</dt> <dd><%= arp.multiple_pass %></dd>
+              <dt>White Color Pause</dt> <dd><%= arp.white_color_pause %></dd>
+              <dt>Unidirectional</dt> <dd><%= arp.unidirectional %></dd>
+              <dt>Machine Mode</dt> <dd><%= arp.machine_mode %></dd>
+              <dt>Ink</dt> <dd><%= arp.ink %></dd>
+              <dt>Ink Volume</dt> <dd><%= arp.ink_volume %></dd>
+            </dl>
+          </td>
+          <td>
+            <dl>
+              <dt>Black Ink</dt> <dd><%= arp.print_with_black_ink %></dd>
+              <dt>CMYGray</dt> <dd><%= arp.cmy_gray %></dd>
+              <dt>Resolution</dt> <dd><%= arp.resolution %></dd>
+            </dl>
+          </td>
+          <td>
+            <dl>
+              <dt>Tolerance</dt> <dd><%= arp.tolerance %></dd>
+              <dt>Choke Width</dt> <dd><%= arp.choke_width %></dd>
+            </dl>
+          </td>
+          <td>
+            <dl>
+              <dt>Transparency</dt> <dd><%= arp.transparency %></dd>
+              <dt>Red</dt> <dd><%= arp.transparency_red %></dd>
+              <dt>Blue</dt> <dd><%= arp.transparency_blue %></dd>
+              <dt>Green</dt> <dd><%= arp.transparency_green %></dd>
+            </dl>
+          </td>
+          <td>
+            <dl>
+              <dt>Width</dt> <dd><%= arp.width %></dd>
+              <dt>Height</dt> <dd><%= arp.height %></dd>
+              <dt>From Top</dt> <dd><%= arp.from_top %></dd>
+              <dt>From Center</dt> <dd><%= arp.from_center %></dd>
+              <dt>From Center</dt> <dd><%= arp.from_center %></dd>
+            </dl>
+          </td>
+        </tr>
+       <% end %>
+       </tbody>
+    </table>
+  </div>
+<% end %>

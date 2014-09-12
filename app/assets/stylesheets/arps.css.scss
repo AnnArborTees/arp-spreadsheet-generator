@@ -1,0 +1,26 @@
+// Place all the styles related to the arps controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#arps.table-responsive{
+  width:100%;
+  max-width:100%;
+  overflow-x:scroll;
+}
+
+#arps dt, #arps dd, #mass_lines dt, #mass_lines dd  {
+  display: inline;
+}
+
+#arps dt:after, #mass_lines dt:after {
+  content: ': '; display: inline;
+}
+
+#arps dd:after, #mass_lines dd:after  {
+  content: ''; display: block;
+}
+
+#arps, #mass_lines {
+  font-size: 12px;
+}
+

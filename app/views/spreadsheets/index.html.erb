@@ -1,3 +1,5 @@
+<h1 class="page-header">Spreadsheets</h1>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -7,6 +9,9 @@
         <th>
             Batch #
         </th>
+          <th>
+            File
+          </th>
         <th>
             State
         </th>
@@ -15,6 +20,9 @@
   <tbody>
     <% @spreadsheets.each do |ss| %>
     <tr>
+        <td>
+          <%= ss.id %>
+        </td>
         <td>
           <%= ss.batch_id %>
         </td>

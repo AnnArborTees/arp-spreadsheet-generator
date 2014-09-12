@@ -2,7 +2,7 @@ require 'csv'
 
 class Spreadsheet < ActiveRecord::Base
   before_create :initialize_state
-  before_create :create_arps
+
 
   has_attached_file :file
 
@@ -16,15 +16,16 @@ class Spreadsheet < ActiveRecord::Base
   validates :file, presence: true
 
 
+  def create_arps
+    CSV.foreach(self.file.path, headers: true) do |row|
+      Arp.find_or_create_by(sku: row['SKU'].strip, platen: row['PLATEN'].strip)
+    end
+  end
+
   private
 
   def initialize_state
     self.state = 'Pending'
   end
 
-  def create_arps
-    CSV.foreach(self.file.path, headers: true) do |row|
-      Arp.find_or_create_by(sku: row['SKU'], platen: row['PLATEN'])
-    end
-  end
 end

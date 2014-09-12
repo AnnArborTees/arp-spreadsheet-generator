@@ -1,0 +1,2 @@
+class MockBotSettings < ApiSettings
+end

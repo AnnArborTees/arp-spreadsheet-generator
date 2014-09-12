@@ -1,0 +1,98 @@
+<%= link_to new_mass_line_path,  class: 'btn btn-primary pull-right' do %>
+    <span class="glyphicon glyphicon-plus"></span> Add Mass Line
+<% end %>
+<h1 class="page-header">Mass Lines</h1>
+
+
+<% if @mass_lines.empty? %>
+    <div class="jumbotron">
+      <h1>There are No mass lines that meet your search criteria</h1>
+      <p>Try searching with something different</p>
+    </div>
+<% else %>
+    <div id="mass_lines" class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>Prefixes</th>
+          <th>Platen</th>
+          <th>mass_line</th>
+          <th>AR3</th>
+          <th>Machine Settings</th>
+          <th>Print Settings</th>
+          <th>Image Settings</th>
+          <th>Transparency</th>
+          <th>Pretreat Settings</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @mass_lines.each do |mass_line| %>
+            <tr>
+              <td>
+                <dl>
+                  <dt>SKU</dt> <dd><%= mass_line.prefix %></dd>
+                  <dt>File</dt> <dd><%= mass_line.file_location_prefix %></dd>
+                </dl>
+
+              </td>
+              <td>
+                <%= mass_line.platen %>
+              </td>
+              <td>
+                <dl>
+                  <dt>Mask</dt> <dd><%= mass_line.maskp %></dd>
+                  <dt>Highlight</dt> <dd><%= mass_line.highlightp %></dd>
+                </dl>
+              </td>
+              <td>
+                <dl>
+                  <dt>Mask</dt> <dd><%= mass_line.mask3 %></dd>
+                  <dt>Highlight</dt> <dd><%= mass_line.highlight3 %></dd>
+                </dl>
+              </td>
+              <td>
+                <dl>
+                  <dt>Multi Pass</dt> <dd><%= mass_line.multiple_pass %></dd>
+                  <dt>White Color Pause</dt> <dd><%= mass_line.white_color_pause %></dd>
+                  <dt>Unidirectional</dt> <dd><%= mass_line.unidirectional %></dd>
+                  <dt>Machine Mode</dt> <dd><%= mass_line.machine_mode %></dd>
+                  <dt>Ink</dt> <dd><%= mass_line.ink %></dd>
+                  <dt>Ink Volume</dt> <dd><%= mass_line.ink_volume %></dd>
+                </dl>
+              </td>
+              <td>
+                <dl>
+                  <dt>Black Ink</dt> <dd><%= mass_line.print_with_black_ink %></dd>
+                  <dt>CMYGray</dt> <dd><%= mass_line.cmy_gray %></dd>
+                  <dt>Resolution</dt> <dd><%= mass_line.resolution %></dd>
+                </dl>
+              </td>
+              <td>
+                <dl>
+                  <dt>Tolerance</dt> <dd><%= mass_line.tolerance %></dd>
+                  <dt>Choke Width</dt> <dd><%= mass_line.choke_width %></dd>
+                </dl>
+              </td>
+              <td>
+                <dl>
+                  <dt>Transparency</dt> <dd><%= mass_line.transparency %></dd>
+                  <dt>Red</dt> <dd><%= mass_line.transparency_red %></dd>
+                  <dt>Blue</dt> <dd><%= mass_line.transparency_blue %></dd>
+                  <dt>Green</dt> <dd><%= mass_line.transparency_green %></dd>
+                </dl>
+              </td>
+              <td>
+                <dl>
+                  <dt>Width</dt> <dd><%= mass_line.width %></dd>
+                  <dt>Height</dt> <dd><%= mass_line.height %></dd>
+                  <dt>From Top</dt> <dd><%= mass_line.from_top %></dd>
+                  <dt>From Center</dt> <dd><%= mass_line.from_center %></dd>
+                  <dt>From Center</dt> <dd><%= mass_line.from_center %></dd>
+                </dl>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+<% end %>
