@@ -3,8 +3,9 @@ class Arp < ActiveRecord::Base
   PLATENS = %w(14x16 10x12 7x8 16x18)
   INKS = %w(cw C W)
 
+  belongs_to :spreadsheet
+
   after_initialize :assign_static_values
-  before_save :assign_complete
 
   validates :sku, uniqueness: {scope: :platen}, presence: true
   validates :platen, presence: true
@@ -74,9 +75,9 @@ class Arp < ActiveRecord::Base
     end
   end
 
+  private
 
   def assign_static_values
-    self.file_location = default_file_location
     self.machine_mode = 'GT-381'
     self.resolution = 600
     self.tolerance = 30
@@ -84,17 +85,6 @@ class Arp < ActiveRecord::Base
     self.white_color_pause = 0
     self.unidirectional = 0
     self.multiple_pass = 0
-  end
-
-  def assign_complete
-    self.complete = true
-    self.attributes.each do |attr, val|
-      if attr != 'complete'
-        if val.blank?
-          self.complete = false
-        end
-      end
-    end
   end
 
   def default_file_location
