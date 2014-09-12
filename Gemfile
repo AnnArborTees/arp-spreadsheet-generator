@@ -34,6 +34,10 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
+  gem 'capistrano-bundler'
 end
 
 # Use ActiveModel has_secure_password
@@ -56,4 +60,3 @@ gem 'bootstrap_form'
 gem 'paperclip', '~> 4.2'
 gem 'figaro'
 gem 'activeresource'
-gem 'capistrano', '~> 3.2.0'
