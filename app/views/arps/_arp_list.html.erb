@@ -2,7 +2,6 @@
   <table class="table table-hover">
     <thead>
     <tr>
-      <th>Get Data</th>
       <th>SKU & File</th>
       <th>Platen</th>
       <th>ARP</th>
@@ -12,15 +11,13 @@
       <th>Image Settings</th>
       <th>Transparency</th>
       <th>Pretreat Settings</th>
+      <th>Actions</th>
     </tr>
     </thead>
     <tbody>
     <% arps.each do |arp| %>
 
         <tr class="<%= arp_row_class arp %>">
-          <td>
-            <%= link_to 'Mass Line', edit_arp_path(arp, source: 'mass_line'), class: 'btn btn-primary' %>
-          </td>
           <td>
             <dl>
               <dt>SKU</dt> <dd><%= arp.sku %></dd>
@@ -80,8 +77,17 @@
               <dt>Height</dt> <dd><%= arp.height %></dd>
               <dt>From Top</dt> <dd><%= arp.from_top %></dd>
               <dt>From Center</dt> <dd><%= arp.from_center %></dd>
-              <dt>From Center</dt> <dd><%= arp.from_center %></dd>
             </dl>
+          </td>
+          <td>
+            <div class="btn-group-vertical">
+              <%= link_to edit_arp_path(arp), class: 'btn btn-default btn-sm' do %>
+                  <span class="glyphicon glyphicon-list"></span> Edit
+              <% end %>
+              <%= link_to generate_arp_path(arp), class: 'btn btn-default btn-sm' do %>
+                  <span class="glyphicon glyphicon-refresh"></span> Generate
+              <% end %>
+            </div>
           </td>
         </tr>
     <% end %>

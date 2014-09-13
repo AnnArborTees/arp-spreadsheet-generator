@@ -40,10 +40,9 @@
           <%= link_to spreadsheet_path(ss), class: 'btn btn-default btn-sm' do %>
               <span class="glyphicon glyphicon-list"></span> View
           <% end %>
-
-          <button type="button" class="btn btn-default btn-sm">
-            <span class="glyphicon glyphicon-refresh"></span> Generate
-          </button>
+          <%= link_to generate_arps_spreadsheet_path(ss), class: 'btn btn-default btn-sm' do %>
+              <span class="glyphicon glyphicon-refresh"></span> Generate
+          <% end %>
         </div>
       </td>
     </tr>
