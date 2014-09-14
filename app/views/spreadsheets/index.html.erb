@@ -43,6 +43,9 @@
           <%= link_to generate_arps_spreadsheet_path(ss), class: 'btn btn-default btn-sm' do %>
               <span class="glyphicon glyphicon-refresh"></span> Generate
           <% end %>
+          <%= link_to download_spreadsheet_path(ss, format: 'csv'), class: 'btn btn-default btn-sm' do %>
+              <span class="glyphicon glyphicon-save"></span> Download
+          <% end %>
         </div>
       </td>
     </tr>

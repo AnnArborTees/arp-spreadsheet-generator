@@ -12,6 +12,7 @@ ArpSpreadsheetGenerator::Application.routes.draw do
   resources :spreadsheets do
     member do
       get 'generate_arps'
+      get 'download'
     end
   end
 
