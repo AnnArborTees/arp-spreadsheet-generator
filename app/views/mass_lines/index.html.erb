@@ -24,6 +24,7 @@
           <th>Image Settings</th>
           <th>Transparency</th>
           <th>Pretreat Settings</th>
+          <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -89,7 +90,15 @@
                   <dt>From Top</dt> <dd><%= mass_line.from_top %></dd>
                   <dt>From Center</dt> <dd><%= mass_line.from_center %></dd>
                   <dt>From Center</dt> <dd><%= mass_line.from_center %></dd>
+                  <dt>Pretreat</dt> <dd><%= mass_line.pretreat_level %></dd>
                 </dl>
+              </td>
+              <td>
+                <div class="btn-group">
+                  <%= link_to edit_mass_line_path(mass_line), class: 'btn btn-default btn-sm' do %>
+                      <span class="glyphicon glyphicon-edit"></span> Edit
+                  <% end %>
+                </div>
               </td>
             </tr>
         <% end %>

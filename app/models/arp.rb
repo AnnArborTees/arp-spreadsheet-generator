@@ -27,6 +27,7 @@ class Arp < ActiveRecord::Base
         self.maskp = 3
         self.ink = 'cw'
         self.ink_volume = 0
+        self.pretreat_level = 65
       else
         self.highlight3 = 0
         self.mask3 = 0
@@ -36,6 +37,7 @@ class Arp < ActiveRecord::Base
         self.ink_volume = 10
         self.print_with_black_ink = 1
         self.cmy_gray = 0
+        self.pretreat_level = 0
       end
 
       idea.artworks.each do |artwork|
@@ -104,6 +106,7 @@ class Arp < ActiveRecord::Base
       self.height = mass_line.height
       self.from_top = mass_line.from_top
       self.from_center = mass_line.from_center
+      self.pretreat_level = mass_line.pretreat_level
     end
   end
 
@@ -117,6 +120,8 @@ class Arp < ActiveRecord::Base
     self.white_color_pause = 0
     self.unidirectional = 0
     self.multiple_pass = 0
+    self.cmyk_ink_volume = 99.9
+    self.white_ink_volume = 99.9
   end
 
   def default_file_location

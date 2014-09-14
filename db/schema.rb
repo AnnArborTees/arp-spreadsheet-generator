@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140912193736) do
+ActiveRecord::Schema.define(version: 20140914172255) do
 
   create_table "api_settings", force: true do |t|
     t.string "type"
@@ -50,12 +50,13 @@ ActiveRecord::Schema.define(version: 20140912193736) do
     t.decimal  "height",               precision: 5, scale: 2
     t.decimal  "from_top",             precision: 5, scale: 2
     t.decimal  "from_center",          precision: 5, scale: 2
-    t.decimal  "cmyk_ink_colume",      precision: 5, scale: 2
+    t.decimal  "cmyk_ink_volume",      precision: 5, scale: 2
     t.decimal  "white_ink_volume",     precision: 5, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "complete"
     t.integer  "spreadsheet_id"
+    t.integer  "pretreat_level"
   end
 
   add_index "arps", ["complete"], name: "index_arps_on_complete", using: :btree
@@ -94,6 +95,7 @@ ActiveRecord::Schema.define(version: 20140912193736) do
     t.decimal  "white_ink_volume",     precision: 5, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "pretreat_level"
   end
 
   add_index "mass_lines", ["platen"], name: "index_mass_lines_on_platen", using: :btree

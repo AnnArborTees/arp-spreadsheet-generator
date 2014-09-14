@@ -1,8 +1,8 @@
 <div class="form-group">
-  <%= bootstrap_form_for(@arp, layout: :horizontal) do |f| %>
+  <%= bootstrap_form_for(mass_line, layout: :horizontal) do |f| %>
       <%= f.alert_message 'Please fix the errors below.' %>
-      <%= f.text_field :sku, placeholder: 'SKU', label: 'SKU', prompt: true %>
-      <%= f.text_field :file_location, label: 'File Location', placeholder: 'Files can be found in this folder' %>
+      <%= f.text_field :prefix, placeholder: 'Mass Line SKU Starts With', label: 'Sku Prefix', prompt: true %>
+      <%= f.text_field :file_location_prefix, label: 'File Location', placeholder: 'Files can be found in this folder' %>
       <%= f.text_field :machine_mode, disabled: true %>
 
       <%= f.select :platen, Arp::PLATENS, prompt: true %>
@@ -31,8 +31,6 @@
       <%= f.text_field :from_center %>
       <%= f.text_field :pretreat_level %>
 
-      <%= f.text_field :cmyk_ink_volume %>
-      <%= f.text_field :white_ink_volume %>
 
       <%= f.text_field :resolution, disabled: true %>
       <%= f.text_field :ink_volume, placeholder: 'Assigned Automatically', disabled: true %>
