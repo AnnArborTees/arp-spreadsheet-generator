@@ -56,8 +56,8 @@ class Arp < ActiveRecord::Base
           else
             rgb = artwork.background_color.gsub("#", '').scan(/../).map {|color| color.to_i(16)}
             self.transparency_red = rgb[0]
-            self.transparency_blue = rgb[1]
-            self.transparency_green = rgb[2]
+            self.transparency_green = rgb[1]
+            self.transparency_blue = rgb[2]
             if artwork.background_color == '#000000'
               self.print_with_black_ink = false
               self.cmy_gray = true

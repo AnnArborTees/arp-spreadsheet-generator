@@ -1,7 +1,7 @@
 <%= link_to generate_arps_spreadsheet_path(@spreadsheet),  class: 'btn btn-primary pull-right' do %>
     <span class="glyphicon glyphicon-refresh"></span> Generate All
 <% end %>
-<%= link_to download_spreadsheet_path(@spreadsheet),  class: 'btn btn-primary pull-right' do %>
+<%= link_to download_spreadsheet_path(@spreadsheet, format: 'csv'),  class: 'btn btn-primary pull-right' do %>
     <span class="glyphicon glyphicon-download"></span> Download
 <% end %>
 
