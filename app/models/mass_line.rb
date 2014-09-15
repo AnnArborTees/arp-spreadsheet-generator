@@ -1,3 +1,4 @@
+require 'csv'
 class MassLine < ActiveRecord::Base
   after_initialize :assign_static_values
 
@@ -9,6 +10,24 @@ class MassLine < ActiveRecord::Base
             :choke_width, :width, :height, :from_top, :from_center,
             presence: true
 
+  def self.generate_from_csv(csv)
+    error_prefixes = []
+    CSV.foreach(csv, headers: true) do |row|
+      ml = MassLine.find_or_initialize_by(prefix: row['PREFIX'])
+      ml.attributes.each do |attr, val|
+        if !row[attr.upcase].nil?
+          ml.attributes = { attr => row[attr.upcase] }
+        end
+      end
+
+      if !ml.prefix.nil?
+        if !ml.save
+          error_prefixes << row['PREFIX']
+        end
+      end
+    end
+    error_prefixes
+  end
 
   private
 

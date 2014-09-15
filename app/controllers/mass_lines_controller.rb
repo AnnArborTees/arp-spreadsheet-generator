@@ -13,6 +13,17 @@ class MassLinesController < InheritedResources::Base
       failure.html { render }
     end
   end
+
+  def process_spreadsheet
+    errors = MassLine.generate_from_csv(params[:csv].tempfile.to_path)
+    if errors.empty?
+      redirect_to mass_lines_path, notice: 'Sucessfully added/updated all Mass Lines from Spreadsheet'
+    else
+      redirect_to mass_lines_path, error: "Added/Updated Mass Lines, but had errors with #{errors.join(', ')}"
+    end
+
+  end
+
   private
 
   def mass_line_params

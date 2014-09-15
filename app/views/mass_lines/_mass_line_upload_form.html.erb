@@ -1,0 +1,11 @@
+<%= form_tag :process_mass_line, multipart: true, method: :put do %>
+
+    <div class="input-group">
+      <%= file_field_tag 'csv', class: 'form-control', required: true %>
+      <span class="input-group-btn">
+        <%= button_tag class: 'btn btn-primary' do %>
+             <span class="glyphicon glyphicon-upload"></span> Update/Generate Mass Lines
+        <% end %>
+      </span>
+    </div>
+<% end %>
