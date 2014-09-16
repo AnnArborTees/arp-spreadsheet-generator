@@ -3,7 +3,10 @@ class Arp < ActiveRecord::Base
   PLATENS = %w(14x16 10x12 7x8 16x18)
   INKS = %w(cw C W)
 
-  belongs_to :spreadsheet
+  default_scope order(:sku)
+
+  has_many :spreadsheets, through: :spreadsheet_arps
+  has_many :spreadsheet_arps
 
   after_initialize :assign_static_values
 
@@ -71,7 +74,7 @@ class Arp < ActiveRecord::Base
 
   def find_mass_line_for_arp
     MassLine.all.each do |mass_line|
-      if self.sku.starts_with? mass_line.prefix
+      if self.sku.starts_with? mass_line.prefix and self.platen == mass_line.platen
         return mass_line
       end
     end

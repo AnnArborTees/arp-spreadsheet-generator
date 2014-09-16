@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140914172255) do
+ActiveRecord::Schema.define(version: 20140916210359) do
 
   create_table "api_settings", force: true do |t|
     t.string "type"
@@ -100,6 +100,14 @@ ActiveRecord::Schema.define(version: 20140914172255) do
 
   add_index "mass_lines", ["platen"], name: "index_mass_lines_on_platen", using: :btree
   add_index "mass_lines", ["prefix"], name: "index_mass_lines_on_prefix", using: :btree
+
+  create_table "spreadsheet_arps", force: true do |t|
+    t.integer "spreadsheet_id"
+    t.integer "arp_id"
+  end
+
+  add_index "spreadsheet_arps", ["arp_id"], name: "index_spreadsheet_arps_on_arp_id", using: :btree
+  add_index "spreadsheet_arps", ["spreadsheet_id"], name: "index_spreadsheet_arps_on_spreadsheet_id", using: :btree
 
   create_table "spreadsheets", force: true do |t|
     t.integer  "user_id"
