@@ -17,7 +17,7 @@ class Spreadsheet < ActiveRecord::Base
                      message: 'must be in CSV Format'
                  }
 
-  validates :batch_id, presence: true, numericality: true
+  validates :batch_id, presence: true
   validates :file, presence: true
 
 
