@@ -2,7 +2,7 @@ require 'csv'
 class MassLine < ActiveRecord::Base
   after_initialize :assign_static_values
 
-  before_validation :set_ink_volume
+  before_validation :set_ink_volume, :downcase_prefix
   validate :prefix, :no_prefix_conflict
 
   validates :prefix, :file_location_prefix, :machine_mode, :platen, :resolution, :ink, :ink_volume,
@@ -31,9 +31,13 @@ class MassLine < ActiveRecord::Base
 
   private
 
+  def downcase_prefix
+    self.prefix.downcase!
+  end
+
   def no_prefix_conflict
     MassLine.all.each do |mass_line|
-      if (mass_line.prefix.include? self.prefix or self.prefix.include? mass_line.prefix) and self.id != mass_line.id
+      if (mass_line.prefix.starts_with? self.prefix or self.prefix.starts_with? mass_line.prefix) and self.id != mass_line.id
         errors.add(:prefix, "There's a sku conflict with the mass line #{mass_line.prefix}")
       end
     end

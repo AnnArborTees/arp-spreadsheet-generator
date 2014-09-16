@@ -110,6 +110,7 @@ class Arp < ActiveRecord::Base
       self.from_top = mass_line.from_top
       self.from_center = mass_line.from_center
       self.pretreat_level = mass_line.pretreat_level
+      self.requires_renaming = mass_line.requires_renaming
     end
   end
 

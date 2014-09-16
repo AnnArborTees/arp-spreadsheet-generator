@@ -9,15 +9,15 @@ class ArpsController < InheritedResources::Base
       arp.populate_info_from_mass_line
       arp.complete = true
       arp.save
-      redirect_to spreadsheet_path(arp.spreadsheet), notice: "Generated ARP #{arp.sku} Data from Mass Line #{mass_line.prefix}"
+      redirect_to spreadsheet_path(arp.spreadsheets.first), notice: "Generated ARP #{arp.sku} Data from Mass Line #{mass_line.prefix}"
     elsif !idea.nil?
       arp.populate_info_from_mockbot(idea)
       arp.complete = true
       arp.save
-      redirect_to spreadsheet_path(arp.spreadsheet), notice: "Generated ARP #{arp.sku} Data from MockBot Idea"
+      redirect_to spreadsheet_path(arp.spreadsheets.first), notice: "Generated ARP #{arp.sku} Data from MockBot Idea"
     else
       flash[:error] = "Failed to match ARP #{arp.sku} with either a mass line or a MockBot idea"
-      redirect_to spreadsheet_path(arp.spreadsheet)
+      redirect_to spreadsheet_path(arp.spreadsheets.first)
     end
   end
 
