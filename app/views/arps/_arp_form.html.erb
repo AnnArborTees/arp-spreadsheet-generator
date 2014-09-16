@@ -4,6 +4,9 @@
       <%= f.text_field :sku, placeholder: 'SKU', label: 'SKU', prompt: true %>
       <%= f.text_field :file_location, label: 'File Location', placeholder: 'Files can be found in this folder' %>
       <%= f.text_field :machine_mode, disabled: true %>
+      <%= f.form_group :requires_renaming, label: { text: 'Local file requires renaming' } do %>
+          <%= f.check_box :requires_renaming, label: 'Check for Yes' %>
+      <% end %>
 
       <%= f.select :platen, Arp::PLATENS, prompt: true %>
       <%= f.select :ink, Arp::INKS, prompt: true %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140916211633) do
+ActiveRecord::Schema.define(version: 20140916215023) do
 
   create_table "api_settings", force: true do |t|
     t.string "type"
@@ -57,10 +57,12 @@ ActiveRecord::Schema.define(version: 20140916211633) do
     t.boolean  "complete"
     t.integer  "spreadsheet_id"
     t.integer  "pretreat_level"
+    t.boolean  "requires_renaming",                            default: false
   end
 
   add_index "arps", ["complete"], name: "index_arps_on_complete", using: :btree
   add_index "arps", ["platen"], name: "index_arps_on_platen", using: :btree
+  add_index "arps", ["requires_renaming"], name: "index_arps_on_requires_renaming", using: :btree
   add_index "arps", ["sku"], name: "index_arps_on_sku", using: :btree
   add_index "arps", ["spreadsheet_id"], name: "index_arps_on_spreadsheet_id", using: :btree
 
@@ -96,10 +98,12 @@ ActiveRecord::Schema.define(version: 20140916211633) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "pretreat_level"
+    t.boolean  "requires_renaming",                            default: false
   end
 
   add_index "mass_lines", ["platen"], name: "index_mass_lines_on_platen", using: :btree
   add_index "mass_lines", ["prefix"], name: "index_mass_lines_on_prefix", using: :btree
+  add_index "mass_lines", ["requires_renaming"], name: "index_mass_lines_on_requires_renaming", using: :btree
 
   create_table "spreadsheet_arps", force: true do |t|
     t.integer "spreadsheet_id"

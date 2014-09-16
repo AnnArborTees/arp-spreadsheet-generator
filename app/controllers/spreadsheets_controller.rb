@@ -31,7 +31,7 @@ class SpreadsheetsController < InheritedResources::Base
 
   end
 
-  def download
+  def images_to_rename
     @spreadsheet = Spreadsheet.find(params[:id])
     respond_to do |format|
       format.html
@@ -39,6 +39,12 @@ class SpreadsheetsController < InheritedResources::Base
     end
   end
 
+  def download
+    @spreadsheet = Spreadsheet.find(params[:id])
+    respond_to do |format|
+      format.html
+    end
+  end
   private
 
   def spreadsheet_params

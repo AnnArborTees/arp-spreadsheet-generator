@@ -17,6 +17,7 @@ ArpSpreadsheetGenerator::Application.routes.draw do
     member do
       get 'generate_arps'
       get 'download'
+      get 'images_to_rename'
     end
   end
 

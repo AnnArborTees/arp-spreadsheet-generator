@@ -1,0 +1,31 @@
+<div class="container">
+  <h1 class="heading">PNG Files that require renaming</h1>
+  <table class="table">
+    <thead>
+    <th>
+      ARP Sku
+    </th>
+    <th>
+      Proper Filename
+    </th>
+    <th>
+      Anticipated Location
+    </th>
+    </thead>
+    <tbody>
+    <% @spreadsheet.arps_to_rename.each do |arp| %>
+    <tr>
+      <td>
+        <%= arp.sku %>
+      </td>
+      <td>
+        <%= "#{arp.sku}#{arp.platen}.png" %>
+      </td>
+      <td>
+        <%= arp.file_location %>
+      </td>
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

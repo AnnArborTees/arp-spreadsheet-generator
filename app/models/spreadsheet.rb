@@ -42,6 +42,10 @@ class Spreadsheet < ActiveRecord::Base
     end
   end
 
+  def arps_to_rename
+    arps.where(requires_renaming: true)
+  end
+
   private
 
   def format_value(val)

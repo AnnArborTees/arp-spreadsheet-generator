@@ -11,6 +11,9 @@
       <%= f.select :mask3, (0..10).to_a, prompt: true%>
       <%= f.select :highlightp, (0..3).to_a, prompt: true %>
       <%= f.select :maskp, (0..5).to_a, prompt: true %>
+      <%= f.form_group :requires_renaming, label: { text: 'Local file requires renaming' } do %>
+          <%= f.check_box :requires_renaming, label: 'Check for Yes' %>
+      <% end %>
 
       <% %w(print_with_black_ink cmy_gray multiple_pass
                  white_color_pause unidirectional transparency).each do |attr|  %>
