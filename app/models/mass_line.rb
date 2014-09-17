@@ -10,10 +10,12 @@ class MassLine < ActiveRecord::Base
             :choke_width, :width, :height, :from_top, :from_center,
             presence: true
 
+  default_scope order(:prefix)
+
   def self.generate_from_csv(csv)
     error_prefixes = []
     CSV.foreach(csv, headers: true) do |row|
-      ml = MassLine.find_or_initialize_by(prefix: row['PREFIX'], sku: row['SKU'])
+      ml = MassLine.find_or_initialize_by(prefix: row['PREFIX'], platen: row['PLATEN'])
       ml.attributes.each do |attr, val|
         if !row[attr.upcase].nil?
           ml.attributes = { attr => row[attr.upcase] }
@@ -37,7 +39,7 @@ class MassLine < ActiveRecord::Base
 
   def no_prefix_conflict
     MassLine.all.each do |mass_line|
-      if (mass_line.prefix.starts_with? self.prefix or self.prefix.starts_with? mass_line.prefix) and self.id != mass_line.id
+      if (mass_line.prefix.starts_with? self.prefix or self.prefix.starts_with? mass_line.prefix) and mass_line.platen == self.platen and self.id != mass_line.id
         errors.add(:prefix, "There's a sku conflict with the mass line #{mass_line.prefix}")
       end
     end
