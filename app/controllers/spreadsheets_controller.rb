@@ -42,7 +42,7 @@ class SpreadsheetsController < InheritedResources::Base
   def download
     @spreadsheet = Spreadsheet.find(params[:id])
     respond_to do |format|
-      format.html
+      format.csv { send_data @spreadsheet.csv_download, filename: "arps_to_generate_batch_#{@spreadsheet.batch_id}.csv" }
     end
   end
 
