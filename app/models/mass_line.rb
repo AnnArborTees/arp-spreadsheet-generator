@@ -23,6 +23,7 @@ class MassLine < ActiveRecord::Base
       end
 
       if !ml.prefix.nil?
+        ml.prefix.downcase!
         if !ml.save
           error_prefixes << row['PREFIX']
         end
