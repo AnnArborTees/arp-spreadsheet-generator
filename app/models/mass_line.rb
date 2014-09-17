@@ -13,7 +13,7 @@ class MassLine < ActiveRecord::Base
   def self.generate_from_csv(csv)
     error_prefixes = []
     CSV.foreach(csv, headers: true) do |row|
-      ml = MassLine.find_or_initialize_by(prefix: row['PREFIX'])
+      ml = MassLine.find_or_initialize_by(prefix: row['PREFIX'], sku: row['SKU'])
       ml.attributes.each do |attr, val|
         if !row[attr.upcase].nil?
           ml.attributes = { attr => row[attr.upcase] }
