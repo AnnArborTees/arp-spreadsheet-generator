@@ -7,6 +7,9 @@
 <%= link_to images_to_rename_spreadsheet_path(@spreadsheet),  class: 'btn btn-primary pull-right', style: 'margin-right: 5px;' do %>
     <span class="glyphicon glyphicon-picture"></span> View Files that need Renaming
 <% end %>
+<%= link_to missing_arps_spreadsheet_path(@spreadsheet),  class: 'btn btn-primary pull-right', style: 'margin-right: 5px;' do %>
+    <span class="glyphicon glyphicon-picture"></span> View Missing ARPs
+<% end %>
 
 <h1>ARPS Associated with Spreadsheet</h1>
 

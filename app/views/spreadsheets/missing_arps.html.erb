@@ -1,0 +1,27 @@
+<div class="container">
+  <h1 class="heading">ARPS that need info</h1>
+  <table class="table">
+    <thead>
+    <th>
+      SKU
+    </th>
+    <th>
+      PLATEN
+    </th>
+    </thead>
+    <tbody>
+    <% @spreadsheet.arps.each do |arp| %>
+        <% if !arp.complete? %>
+        <tr>
+          <td>
+            <%= arp.sku %>
+          </td>
+          <td>
+            <%= arp.platen %>
+          </td>
+        </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>

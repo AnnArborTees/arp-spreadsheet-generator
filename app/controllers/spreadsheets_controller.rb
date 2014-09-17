@@ -45,6 +45,14 @@ class SpreadsheetsController < InheritedResources::Base
       format.html
     end
   end
+
+  def missing_arps
+    @spreadsheet = Spreadsheet.find(params[:id])
+    respond_to do |format|
+      format.html
+    end
+  end
+
   private
 
   def spreadsheet_params

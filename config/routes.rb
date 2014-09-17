@@ -18,6 +18,7 @@ ArpSpreadsheetGenerator::Application.routes.draw do
       get 'generate_arps'
       get 'download'
       get 'images_to_rename'
+      get 'missing_arps'
     end
   end
 

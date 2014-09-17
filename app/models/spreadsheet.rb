@@ -46,6 +46,10 @@ class Spreadsheet < ActiveRecord::Base
     arps.where(requires_renaming: true)
   end
 
+  def missing_arps
+    arps.where(complete: false)
+  end
+
   private
 
   def format_value(val)
