@@ -74,7 +74,7 @@ class Arp < ActiveRecord::Base
 
   def find_mass_line_for_arp
     MassLine.all.each do |mass_line|
-      if self.sku.starts_with? mass_line.prefix and self.platen == mass_line.platen
+      if self.sku.downcase.starts_with? mass_line.prefix.downcase and self.platen == mass_line.platen
         return mass_line
       end
     end
