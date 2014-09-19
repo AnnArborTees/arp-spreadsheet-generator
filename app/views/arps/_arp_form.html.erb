@@ -39,6 +39,9 @@
 
       <%= f.text_field :resolution, disabled: true %>
       <%= f.text_field :ink_volume, placeholder: 'Assigned Automatically', disabled: true %>
+      <%= f.form_group :complete, label: { text: 'Data is good and ready to use' } do %>
+          <%= f.check_box :complete, label: 'Check for Yes' %>
+      <% end %>
       <%= f.submit %>
   <% end %>
 </div>
