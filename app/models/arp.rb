@@ -118,14 +118,14 @@ class Arp < ActiveRecord::Base
 
   def assign_static_values
     self.machine_mode = 'GT-381'
-    self.resolution = 600
-    self.tolerance = 30
-    self.choke_width = 3
-    self.white_color_pause = 0
-    self.unidirectional = 0
-    self.multiple_pass = 0
-    self.cmyk_ink_volume = 99.9
-    self.white_ink_volume = 99.9
+    self.resolution = 600 unless !self.resolution.blank?
+    self.tolerance = 30 unless !self.tolerance.blank?
+    self.choke_width = 3 unless !self.choke_width.blank?
+    self.white_color_pause = false unless !self.white_color_pause.blank?
+    self.unidirectional = false unless !self.unidirectional.blank?
+    self.multiple_pass = false unless !self.multiple_pass.blank?
+    self.cmyk_ink_volume = 99.9 unless !self.cmyk_ink_volume.blank?
+    self.white_ink_volume = 99.9 unless !self.white_ink_volume.blank?
   end
 
   def default_file_location
