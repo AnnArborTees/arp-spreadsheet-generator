@@ -1,16 +1,21 @@
-<%= link_to generate_arps_spreadsheet_path(@spreadsheet),  class: 'btn btn-primary pull-right', style: 'margin-right: 5px;' do %>
-    <span class="glyphicon glyphicon-refresh"></span> Generate All
-<% end %>&nbsp;
-<%= link_to download_spreadsheet_path(@spreadsheet, format: 'csv'),  class: 'btn btn-primary pull-right', style: 'margin-right: 5px;' do %>
-    <span class="glyphicon glyphicon-download"></span> Download
-<% end %>
+
+
 <%= link_to images_to_rename_spreadsheet_path(@spreadsheet),  class: 'btn btn-primary pull-right', style: 'margin-right: 5px;' do %>
-    <span class="glyphicon glyphicon-picture"></span> View Files that need Renaming
-<% end %>
-<%= link_to missing_arps_spreadsheet_path(@spreadsheet),  class: 'btn btn-primary pull-right', style: 'margin-right: 5px;' do %>
-    <span class="glyphicon glyphicon-picture"></span> View Missing ARPs
+    <span class="glyphicon glyphicon-picture"></span> 4 View Files that need Renaming
 <% end %>
 
-<h1>ARPS Associated with Spreadsheet</h1>
+<%= link_to download_spreadsheet_path(@spreadsheet, format: 'csv'),  class: 'btn btn-primary pull-right', style: 'margin-right: 5px;' do %>
+    <span class="glyphicon glyphicon-download"></span> 3 Download
+<% end %>
+
+<%= link_to missing_arps_spreadsheet_path(@spreadsheet),  class: 'btn btn-primary pull-right', style: 'margin-right: 5px;' do %>
+    <span class="glyphicon glyphicon-picture"></span> 2 View Missing ARPs
+<% end %>
+
+<%= link_to generate_arps_spreadsheet_path(@spreadsheet),  class: 'btn btn-primary pull-right', style: 'margin-right: 5px;' do %>
+    <span class="glyphicon glyphicon-refresh"></span> 1 Generate All
+<% end %>
+
+<h1>ARPS Associated with Spreadsheet '<%= @spreadsheet.batch_id %>'</h1>
 
 <%= render 'arps/arp_list', arps: @spreadsheet.arps %>

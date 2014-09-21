@@ -30,7 +30,7 @@ class Arp < ActiveRecord::Base
         self.maskp = 3
         self.ink = 'cw'
         self.ink_volume = 0
-        self.pretreat_level = 65
+        self.pretreat_level = get_max_pretreat_value(idea.colors.map{|c| c.name})
       else
         self.highlight3 = 0
         self.mask3 = 0
@@ -144,6 +144,33 @@ class Arp < ActiveRecord::Base
     pixels = pixels.to_i
     dpi = dpi.to_i
     ((pixels * 1.0) / (dpi * 1.0)).round(1)
+  end
+
+  def get_max_pretreat_value(colors)
+    color = colors.max {|a,b| get_pretreat_value(a) <=> get_pretreat_value(b)}
+    get_pretreat_value(color)
+  end
+
+  def get_pretreat_value(color)
+    pt_65 = ['Black', 'Charcoal', 'Chestnut','Dark Chocolate',
+             'Dark Heather','Forest Green','Heather Maroon','
+             Navy','Red','Royal Blue']
+
+    pt_52 = ['Carolina Blue', 'Daisy', 'Heather Irish',
+            'Honey', 'Indigo Blue', 'Irish Green',
+            'Kiwi', 'Light Blue', 'Lime Green', 'Natural',
+            'Orange', 'Sand', 'Sky', 'Sport Grey', 'Yellow']
+
+    if pt_65.include? color
+      return 65
+    elsif pt_52.include? color
+      return 52
+    elsif color == 'White'
+      return 0
+    else
+      return 65
+    end
+
   end
 
 end

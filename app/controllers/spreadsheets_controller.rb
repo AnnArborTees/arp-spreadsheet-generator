@@ -2,7 +2,7 @@ class SpreadsheetsController < InheritedResources::Base
 
   def create
     create! do |success, failure|
-      success.html { redirect_to spreadsheets_path }
+      success.html { redirect_to @spreadsheet }
       failure.html { render }
     end
   end

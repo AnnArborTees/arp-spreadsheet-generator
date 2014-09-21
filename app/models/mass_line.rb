@@ -1,5 +1,7 @@
 require 'csv'
 class MassLine < ActiveRecord::Base
+  acts_as_paranoid
+
   after_initialize :assign_static_values
 
   before_validation :set_ink_volume, :downcase_prefix

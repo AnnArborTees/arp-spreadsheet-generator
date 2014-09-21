@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140916215023) do
+ActiveRecord::Schema.define(version: 20140921210226) do
 
   create_table "api_settings", force: true do |t|
     t.string "type"
@@ -99,8 +99,10 @@ ActiveRecord::Schema.define(version: 20140916215023) do
     t.datetime "updated_at"
     t.integer  "pretreat_level"
     t.boolean  "requires_renaming",                            default: false
+    t.datetime "deleted_at"
   end
 
+  add_index "mass_lines", ["deleted_at"], name: "index_mass_lines_on_deleted_at", using: :btree
   add_index "mass_lines", ["platen"], name: "index_mass_lines_on_platen", using: :btree
   add_index "mass_lines", ["prefix"], name: "index_mass_lines_on_prefix", using: :btree
   add_index "mass_lines", ["requires_renaming"], name: "index_mass_lines_on_requires_renaming", using: :btree

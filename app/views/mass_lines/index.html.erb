@@ -102,6 +102,9 @@
                   <%= link_to edit_mass_line_path(mass_line), class: 'btn btn-default btn-sm' do %>
                       <span class="glyphicon glyphicon-edit"></span> Edit
                   <% end %>
+                  <%= link_to mass_line, method: 'delete', data: { confirm: "Are you sure you want to delete\nmass line data for #{mass_line.prefix}?" }, class: 'btn btn-default btn-sm' do %>
+                      <span class="glyphicon glyphicon-remove"></span> Destroy
+                  <% end %>
                 </div>
               </td>
             </tr>
