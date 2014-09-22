@@ -9,7 +9,7 @@ class Spreadsheet < ActiveRecord::Base
 
 
   has_attached_file :file
-  has_many :arps, through: :spreadsheet_arps
+  has_many :arps, -> { uniq }, through: :spreadsheet_arps
   has_many :spreadsheet_arps
 
   validates_attachment :file,
