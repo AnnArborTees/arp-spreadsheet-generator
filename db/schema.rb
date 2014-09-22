@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140921210226) do
+ActiveRecord::Schema.define(version: 20140922204353) do
 
   create_table "api_settings", force: true do |t|
     t.string "type"
@@ -30,20 +30,20 @@ ActiveRecord::Schema.define(version: 20140921210226) do
     t.string   "platen"
     t.integer  "resolution"
     t.string   "ink"
-    t.integer  "ink_volume"
-    t.integer  "highlight3"
-    t.integer  "mask3"
-    t.integer  "highlightp"
-    t.integer  "maskp"
+    t.integer  "ink_volume",                                   default: 0
+    t.integer  "highlight3",                                   default: 0
+    t.integer  "mask3",                                        default: 0
+    t.integer  "highlightp",                                   default: 0
+    t.integer  "maskp",                                        default: 0
     t.boolean  "print_with_black_ink"
     t.boolean  "cmy_gray"
     t.boolean  "multiple_pass"
     t.boolean  "transparency"
-    t.integer  "transparency_red"
-    t.integer  "transparency_blue"
-    t.integer  "transparency_green"
-    t.integer  "tolerance"
-    t.integer  "choke_width"
+    t.integer  "transparency_red",                             default: 0
+    t.integer  "transparency_blue",                            default: 0
+    t.integer  "transparency_green",                           default: 0
+    t.integer  "tolerance",                                    default: 0
+    t.integer  "choke_width",                                  default: 0
     t.boolean  "white_color_pause"
     t.boolean  "unidirectional"
     t.decimal  "width",                precision: 5, scale: 2
@@ -73,20 +73,20 @@ ActiveRecord::Schema.define(version: 20140921210226) do
     t.string   "platen"
     t.integer  "resolution"
     t.string   "ink"
-    t.integer  "ink_volume"
-    t.integer  "highlight3"
-    t.integer  "mask3"
-    t.integer  "highlightp"
-    t.integer  "maskp"
+    t.integer  "ink_volume",                                   default: 0
+    t.integer  "highlight3",                                   default: 0
+    t.integer  "mask3",                                        default: 0
+    t.integer  "highlightp",                                   default: 0
+    t.integer  "maskp",                                        default: 0
     t.boolean  "print_with_black_ink"
     t.boolean  "cmy_gray"
     t.boolean  "multiple_pass"
     t.boolean  "transparency"
-    t.integer  "transparency_red"
-    t.integer  "transparency_blue"
-    t.integer  "transparency_green"
-    t.integer  "tolerance"
-    t.integer  "choke_width"
+    t.integer  "transparency_red",                             default: 0
+    t.integer  "transparency_blue",                            default: 0
+    t.integer  "transparency_green",                           default: 0
+    t.integer  "tolerance",                                    default: 0
+    t.integer  "choke_width",                                  default: 0
     t.boolean  "white_color_pause"
     t.boolean  "unidirectional"
     t.decimal  "width",                precision: 5, scale: 2
