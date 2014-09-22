@@ -1,5 +1,39 @@
 <div class="container">
   <h1 class="heading">PNG Files that need renaming for batch '<%= link_to @spreadsheet.batch_id, @spreadsheet %>'</h1>
+
+  <h2>PNGs that couldn't be found on the fileserver</h2>
+  <p>These files appear to be missing from the fileserver</p>
+  <table class="table">
+    <thead>
+    <th>
+      ARP Sku
+    </th>
+    <th>
+      Proper Filename
+    </th>
+    <th>
+      Anticipated Location
+    </th>
+    </thead>
+    <tbody>
+    <% @spreadsheet.missing_pngs.each do |arp| %>
+        <tr>
+          <td>
+            <%= arp.sku %>
+          </td>
+          <td>
+            <%= "#{arp.sku}#{arp.platen}.png" %>
+          </td>
+          <td>
+            <%= arp.file_location %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <h2>PNGs flagged that they'll need to be renamed</h2>
+  <p>These files belong to a mass line that traditionally requires files to be renamed</p>
   <table class="table">
     <thead>
     <th>

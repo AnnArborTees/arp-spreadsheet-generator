@@ -1,4 +1,5 @@
 require 'csv'
+require 'net/ftp'
 
 class Spreadsheet < ActiveRecord::Base
   before_create :initialize_state
@@ -48,6 +49,29 @@ class Spreadsheet < ActiveRecord::Base
 
   def missing_arps
     arps.where(complete: false)
+  end
+
+
+  def missing_pngs
+    ftp = Net::FTP::new(Figaro.env['ftp_host'])
+    ftp.login(Figaro.env['ftp_username'], Figaro.env['ftp_password'])
+    ftp.passive = Figaro.env['ftp_passive']
+    arps_missing_pngs = []
+    arps.each do |arp|
+      if arp.file_location.blank?
+        file = ''
+      else
+        file = arp.file_location.gsub("\\AATC\\", '').gsub('\\', '/')
+      end
+
+      begin
+        ftp.size(file)
+      rescue Exception => e
+        arps_missing_pngs << arp
+      end
+    end
+
+    return arps_missing_pngs
   end
 
   private

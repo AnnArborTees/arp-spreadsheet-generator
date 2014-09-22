@@ -1,3 +1,5 @@
+require 'net/ftp'
+
 class Arp < ActiveRecord::Base
 
   PLATENS = %w(14x16 10x12 7x8 16x18)
@@ -79,6 +81,20 @@ class Arp < ActiveRecord::Base
       end
     end
     nil
+  end
+
+  def file_exists_on_server?
+    ftp = Net::FTP::new(Figaro.env['ftp_host'])
+    ftp.login(Figaro.env['ftp_username'], Figaro.env['ftp_password'])
+    ftp.passive = Figaro.env['ftp_passive']
+    file = self.file_location.gsub("\\AATC\\", '').gsub('\\', '/')
+    begin
+      ftp.size(file)
+    rescue Exception => e
+      puts e
+      return false
+    end
+    return true
   end
 
   def populate_info_from_mass_line(mass_line = nil)
