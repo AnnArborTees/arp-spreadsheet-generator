@@ -61,8 +61,6 @@ class MassLine < ActiveRecord::Base
     self.machine_mode = 'GT-381'
     self.print_with_black_ink = true unless !self.print_with_black_ink.blank?
     self.resolution = 600 unless !self.resolution.blank?
-    self.tolerance = 30 unless !self.tolerance.blank?
-    self.choke_width = 3 unless !self.choke_width.blank?
     self.white_color_pause = false unless !self.white_color_pause.blank?
     self.unidirectional = false unless !self.unidirectional.blank?
     self.multiple_pass = false unless !self.multiple_pass.blank?

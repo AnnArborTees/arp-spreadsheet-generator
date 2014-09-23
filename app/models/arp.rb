@@ -11,6 +11,7 @@ class Arp < ActiveRecord::Base
   has_many :spreadsheet_arps
 
   after_initialize :assign_static_values
+  before_save :downcase_sku
 
   validates :sku, uniqueness: {scope: :platen}, presence: true
   validates :platen, presence: true
@@ -44,6 +45,16 @@ class Arp < ActiveRecord::Base
         self.cmy_gray = 0
         self.pretreat_level = 0
       end
+
+      self.resolution = 600
+      self.tolerance = 30
+      self.choke_width = 3
+      self.white_color_pause = false
+      self.unidirectional = false
+      self.multiple_pass = false
+      self.cmyk_ink_volume = 99.9
+      self.white_ink_volume = 99.9
+
 
       idea.artworks.each do |artwork|
         if artwork.dimensions == self.platen
@@ -132,16 +143,16 @@ class Arp < ActiveRecord::Base
 
   private
 
+  def downcase_sku
+    self.sku = self.sku.downcase
+  end
+
   def assign_static_values
     self.machine_mode = 'GT-381'
-    self.resolution = 600 unless !self.resolution.blank?
-    self.tolerance = 30 unless !self.tolerance.blank?
-    self.choke_width = 3 unless !self.choke_width.blank?
+    self.resolution = 600
     self.white_color_pause = false unless !self.white_color_pause.blank?
     self.unidirectional = false unless !self.unidirectional.blank?
     self.multiple_pass = false unless !self.multiple_pass.blank?
-    self.cmyk_ink_volume = 99.9 unless !self.cmyk_ink_volume.blank?
-    self.white_ink_volume = 99.9 unless !self.white_ink_volume.blank?
   end
 
   def default_file_location
