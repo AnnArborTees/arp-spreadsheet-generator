@@ -81,6 +81,8 @@ class Spreadsheet < ActiveRecord::Base
       return 1
     elsif val == false
       return 0
+    elsif val.blank?
+      return 0
     else
       return val
     end
