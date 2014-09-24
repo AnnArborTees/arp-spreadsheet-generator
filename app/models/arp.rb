@@ -153,6 +153,8 @@ class Arp < ActiveRecord::Base
     self.white_color_pause = false unless !self.white_color_pause.blank?
     self.unidirectional = false unless !self.unidirectional.blank?
     self.multiple_pass = false unless !self.multiple_pass.blank?
+    self.cmyk_ink_volume = 99.9
+    self.white_ink_volume = 99.9
   end
 
   def default_file_location
