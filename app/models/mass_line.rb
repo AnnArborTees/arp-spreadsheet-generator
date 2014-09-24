@@ -59,7 +59,6 @@ class MassLine < ActiveRecord::Base
 
   def assign_static_values
     self.machine_mode = 'GT-381'
-    self.print_with_black_ink = true unless !self.print_with_black_ink.blank?
     self.resolution = 600 unless !self.resolution.blank?
     self.white_color_pause = false unless !self.white_color_pause.blank?
     self.unidirectional = false unless !self.unidirectional.blank?
