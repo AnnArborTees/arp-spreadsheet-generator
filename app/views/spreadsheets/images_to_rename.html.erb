@@ -32,34 +32,4 @@
     </tbody>
   </table>
 
-  <h2>PNGs flagged that they'll need to be renamed</h2>
-  <p>These files belong to a mass line that traditionally requires files to be renamed</p>
-  <table class="table">
-    <thead>
-    <th>
-      ARP Sku
-    </th>
-    <th>
-      Proper Filename
-    </th>
-    <th>
-      Anticipated Location
-    </th>
-    </thead>
-    <tbody>
-    <% @spreadsheet.arps_to_rename.each do |arp| %>
-    <tr>
-      <td>
-        <%= arp.sku %>
-      </td>
-      <td>
-        <%= "#{arp.sku}#{arp.platen}.png" %>
-      </td>
-      <td>
-        <%= arp.file_location %>
-      </td>
-    </tr>
-    <% end %>
-    </tbody>
-  </table>
 </div>
