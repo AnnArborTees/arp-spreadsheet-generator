@@ -20,6 +20,7 @@ class Spreadsheet < ActiveRecord::Base
 
   validates :batch_id, presence: true
   validates :file, presence: true
+  validate :good_data?, on: :create
 
 
   def create_arps
@@ -90,6 +91,13 @@ class Spreadsheet < ActiveRecord::Base
 
   def initialize_state
     self.state = 'Pending'
+  end
+
+  def good_data?
+    input = file.queued_for_write[:original]
+    CSV.foreach(input.path, headers: true) do |row|
+      errors.add(:file, "The spreadsheet is missing a platen size for row #{row['SKU']}") if row['PLATEN'].blank?
+    end
   end
 
 end
