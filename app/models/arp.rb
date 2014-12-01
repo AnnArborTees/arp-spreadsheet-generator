@@ -26,7 +26,7 @@ class Arp < ActiveRecord::Base
     idea = MockBot::Idea.find(self.sku) unless !idea.nil?
     if idea.respond_to?('sku')
       self.file_location = default_file_location
-      if idea.base?
+      if idea.artworks.first.base?
         self.highlight3 = 7
         self.mask3 = 3
         self.highlightp = 1
@@ -57,7 +57,8 @@ class Arp < ActiveRecord::Base
 
 
       idea.artworks.each do |artwork|
-        if artwork.dimensions == self.platen
+        platen_size = "#{artwork.imprint_size.width.floor}x#{artwork.imprint_size.height.floor}"
+        if platen_size == self.platen
           self.from_top = in_inches(artwork.from_top, artwork.dpi)
           self.from_center = in_inches(artwork.from_center, artwork.dpi)
           self.width = in_inches(artwork.width, artwork.dpi)
