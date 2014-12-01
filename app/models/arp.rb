@@ -57,7 +57,7 @@ class Arp < ActiveRecord::Base
 
 
       idea.artworks.each do |artwork|
-        platen_size = "#{artwork.imprint_size.width.floor}x#{artwork.imprint_size.height.floor}"
+        platen_size = "#{artwork.imprint_size.width.to_f.floor}x#{artwork.imprint_size.height.to_f.floor}"
         if platen_size == self.platen
           self.from_top = in_inches(artwork.from_top, artwork.dpi)
           self.from_center = in_inches(artwork.from_center, artwork.dpi)
