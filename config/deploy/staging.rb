@@ -14,6 +14,9 @@ role :db,  %w{ubuntu@staging.arp.softwearcrm.com}
 # definition into the server list. The second argument
 # something that quacks like a hash can be used to set
 # extended properties on the server.
+
+set :branch, 'develop'
+
 server 'staging.arp.softwearcrm.com', user: 'ubuntu', roles: %w{web app}#, my_property: :my_value
 
 # you can set custom ssh options
