@@ -1,3 +1,9 @@
+GIT
+  remote: git@github.com:Resonious/dumpsync.git
+  revision: d973380c4c20a16396fe1434f5cea4d57151ec7e
+  specs:
+    dumpsync (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -185,6 +191,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rvm
   coffee-rails (~> 4.0.0)
+  dumpsync!
   figaro
   inherited_resources
   jbuilder (~> 1.2)
