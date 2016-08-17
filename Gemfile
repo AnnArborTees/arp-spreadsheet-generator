@@ -38,6 +38,7 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano-bundler'
+  gem 'byebug'
 end
 
 # Use ActiveModel has_secure_password
@@ -62,4 +63,4 @@ gem 'figaro'
 gem 'activeresource'
 gem 'paranoia', '~> 2.0'
 gem 'dumpsync', git: 'git@github.com:Resonious/dumpsync.git'
-gem 'byebug'
+
