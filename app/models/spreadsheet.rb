@@ -45,7 +45,7 @@ class Spreadsheet < ActiveRecord::Base
   end
 
   def csv_download
-    columns = Arp.column_names + ["CUSTOMIZATIONS"]
+    columns = Arp.column_names + ["customizations"]
     columns.delete_if{ |col| %w(created_at updated_at complete spreadsheet_id id).include? col }
     CSV.generate do |csv|
       csv << columns.map{ |x| x.upcase }
@@ -53,7 +53,7 @@ class Spreadsheet < ActiveRecord::Base
         row = []
         if arp.complete?
           row = arp.attributes.values_at(*columns).map{ |i| format_value(i) }
-          row = row + [ arp.customizations.map{|x| "#{x.spree_variable}==#{x.value}"}.join("||") ]
+          row[columns.count - 1] = arp.customizations.map{|x| "#{x.spree_variable}==#{x.value}"}.join("||")
           csv << row
         end
       end
