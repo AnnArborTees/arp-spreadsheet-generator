@@ -25,8 +25,12 @@ class Spreadsheet < ActiveRecord::Base
 
   def create_arps
     CSV.foreach(file.queued_for_write[:original].path, headers: true) do |row|
-      arp = Arp.find_or_create_by(sku: row['SKU'].strip, platen: row['PLATEN'].strip)
-      unless row['CUSTOMIZATIONS'].blank?
+
+
+      if row['CUSTOMIZATIONS'].blank?
+        arp = Arp.find_or_create_by(sku: row['SKU'].strip, platen: row['PLATEN'].strip)
+      else
+        arp = Arp.create(sku: row['SKU'].strip, platen: row['PLATEN'].strip)
         arp.update_attribute(:customizable, true)
 
         if CustomizableLine.exists?(sku: arp.sku)

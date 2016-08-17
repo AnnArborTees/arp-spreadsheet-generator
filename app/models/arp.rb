@@ -25,7 +25,7 @@ class Arp < ActiveRecord::Base
   after_initialize :assign_static_values
   before_save :downcase_sku
 
-  validates :sku, uniqueness: {scope: :platen}, presence: true
+  validates :sku, uniqueness: {scope: :platen}, presence: true, unless: :customizable?
   validates :platen, presence: true
   validates :platen, inclusion: { in: PLATENS }
   # validates :customizations, presence: :true, if: :customizable?
