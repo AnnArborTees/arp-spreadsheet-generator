@@ -1,2 +1,0 @@
-module MassLinesHelper
-end

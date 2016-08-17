@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140922204353) do
+ActiveRecord::Schema.define(version: 20160815200555) do
 
   create_table "api_settings", force: true do |t|
     t.string "type"
@@ -30,34 +30,38 @@ ActiveRecord::Schema.define(version: 20140922204353) do
     t.string   "platen"
     t.integer  "resolution"
     t.string   "ink"
-    t.integer  "ink_volume",                                   default: 0
-    t.integer  "highlight3",                                   default: 0
-    t.integer  "mask3",                                        default: 0
-    t.integer  "highlightp",                                   default: 0
-    t.integer  "maskp",                                        default: 0
+    t.integer  "ink_volume",                                    default: 0
+    t.integer  "highlight3",                                    default: 0
+    t.integer  "mask3",                                         default: 0
+    t.integer  "highlightp",                                    default: 0
+    t.integer  "maskp",                                         default: 0
     t.boolean  "print_with_black_ink"
     t.boolean  "cmy_gray"
     t.boolean  "multiple_pass"
     t.boolean  "transparency"
-    t.integer  "transparency_red",                             default: 0
-    t.integer  "transparency_blue",                            default: 0
-    t.integer  "transparency_green",                           default: 0
-    t.integer  "tolerance",                                    default: 0
-    t.integer  "choke_width",                                  default: 0
+    t.integer  "transparency_red",                              default: 0
+    t.integer  "transparency_blue",                             default: 0
+    t.integer  "transparency_green",                            default: 0
+    t.integer  "tolerance",                                     default: 0
+    t.integer  "choke_width",                                   default: 0
     t.boolean  "white_color_pause"
     t.boolean  "unidirectional"
-    t.decimal  "width",                precision: 5, scale: 2
-    t.decimal  "height",               precision: 5, scale: 2
-    t.decimal  "from_top",             precision: 5, scale: 2
-    t.decimal  "from_center",          precision: 5, scale: 2
-    t.decimal  "cmyk_ink_volume",      precision: 5, scale: 2
-    t.decimal  "white_ink_volume",     precision: 5, scale: 2
+    t.decimal  "width",                 precision: 5, scale: 2
+    t.decimal  "height",                precision: 5, scale: 2
+    t.decimal  "from_top",              precision: 5, scale: 2
+    t.decimal  "from_center",           precision: 5, scale: 2
+    t.decimal  "cmyk_ink_volume",       precision: 5, scale: 2
+    t.decimal  "white_ink_volume",      precision: 5, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "complete"
     t.integer  "spreadsheet_id"
     t.integer  "pretreat_level"
-    t.boolean  "requires_renaming",                            default: false
+    t.boolean  "requires_renaming",                             default: false
+    t.integer  "customizable_line_id"
+    t.boolean  "customizable"
+    t.string   "custom_artwork_url"
+    t.integer  "customized_artwork_id"
   end
 
   add_index "arps", ["complete"], name: "index_arps_on_complete", using: :btree
@@ -65,6 +69,24 @@ ActiveRecord::Schema.define(version: 20140922204353) do
   add_index "arps", ["requires_renaming"], name: "index_arps_on_requires_renaming", using: :btree
   add_index "arps", ["sku"], name: "index_arps_on_sku", using: :btree
   add_index "arps", ["spreadsheet_id"], name: "index_arps_on_spreadsheet_id", using: :btree
+
+  create_table "customizable_lines", force: true do |t|
+    t.string   "sku"
+    t.string   "spree_variable_name"
+    t.string   "mockbot_variable_name"
+    t.boolean  "case_sensitive"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "customizations", force: true do |t|
+    t.integer  "arp_id"
+    t.string   "spree_variable"
+    t.string   "mockbot_variable"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "mass_lines", force: true do |t|
     t.string   "prefix"

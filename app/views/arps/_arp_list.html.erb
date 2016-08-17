@@ -23,6 +23,24 @@
               <dt>SKU</dt> <dd><%= arp.sku %></dd>
               <dt>File</dt> <dd><%= arp.file_location %></dd>
               <dt>Local File Require Renaming</dt> <dd><%= arp.requires_renaming %></dd>
+              <dt>Customizable</dt> <dd><%= human_boolean arp.customizable %></dd>
+              <% if arp.customizable? %>
+                  <% unless arp.customizable_line.blank? %>
+                      <dt>Customized Line</dt>
+                      <dd><%= link_to arp.customizable_line.sku, customizable_line_path(arp.customizable_line) %></dd>
+                  <% else %>
+                      <dt>Missing a customizable line for ARP</dt>
+                      <dd><%= link_to "Create a new one", new_customizable_line_path(customizable_line: {sku: arp.sku}) %></dd>
+                  <% end %>
+                  <% arp.customizations.each do |customization| %>
+                      <dt><%= customization.spree_variable %>/<%= customization.mockbot_variable %></dt>
+                      <dd><%= customization.value %></dd>
+                  <% end %>
+                  <dt>Customized Artwork URL</dt>
+                  <dd><%= link_to arp.custom_artwork_url, arp.custom_artwork_url %></dd>
+                  <dt>Customized Artwork ID</dt>
+                  <dd><%= arp.customized_artwork_id %></dd>
+              <% end %>
             </dl>
 
           </td>
@@ -90,6 +108,11 @@
               <% end %>
               <%= link_to generate_arp_path(arp, source: :mock_bot), class: 'btn btn-default btn-sm' do %>
                   <span class="glyphicon glyphicon-refresh"></span> Generate
+              <% end %>
+              <% if arp.customizable && arp.customizable_line %>
+                  <%= link_to customize_arp_path(arp), class: 'btn btn-default btn-sm' do %>
+                      <span class="glyphicon glyphicon-refresh"></span> Customize
+                  <% end %>
               <% end %>
             </div>
           </td>

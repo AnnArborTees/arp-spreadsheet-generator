@@ -1,0 +1,61 @@
+<div class="container">
+    <%= link_to new_customizable_line_path, class: 'btn btn-primary pull-right' do %>
+        <span class="glyphicon glyphicon-plus"></span> Add A Customizable Line
+    <% end %>
+
+
+
+
+    <h1 class="page-header">Customizable Lines</h1>
+
+
+    <% if @customizable_lines.empty? %>
+        <div class="jumbotron">
+          <h1>There are No Customizable lines that meet your search criteria</h1>
+
+          <p>Try searching with something different</p>
+        </div>
+    <% else %>
+        <div id="customizable_lines" class="table-responsive">
+          <table class="table table-hover table-striped">
+            <thead>
+            <tr>
+              <th>SKU</th>
+              <th>Spree Variable Name</th>
+              <th>Mockbot Variable Name</th>
+              <th>Case Sensitive?</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @customizable_lines.each do |customizable_line| %>
+                <tr>
+                  <td>
+                    <%= customizable_line.sku %>
+                  </td>
+                  <td>
+                    <%= customizable_line.spree_variable_name %>
+                  </td>
+                  <td>
+                    <%= customizable_line.mockbot_variable_name %>
+                  </td>
+                  <td>
+                    <%= human_boolean customizable_line.case_sensitive %>
+                  </td>
+                  <td>
+                    <div class="btn-group">
+                      <%= link_to edit_customizable_line_path(customizable_line), class: 'btn btn-default btn-sm' do %>
+                          <span class="glyphicon glyphicon-edit"></span> Edit
+                      <% end %>
+                      <%= link_to customizable_line, method: 'delete', data: {confirm: "Are you sure you want to delete\ncustomizable line data for #{customizable_line.sku}?"}, class: 'btn btn-default btn-sm' do %>
+                          <span class="glyphicon glyphicon-remove"></span> Destroy
+                      <% end %>
+                    </div>
+                  </td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+    <% end %>
+</div>

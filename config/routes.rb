@@ -4,12 +4,13 @@ ArpSpreadsheetGenerator::Application.routes.draw do
 
   put :process_mass_line, controller: :mass_lines, action: :process_spreadsheet
 
-  resources :mass_lines
+  resources :mass_lines, :customizable_lines
 
 
   resources :arps do
     member do
       get 'generate'
+      get 'customize'
     end
   end
 

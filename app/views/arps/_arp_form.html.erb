@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="form-group fields">
   <%= bootstrap_form_for(@arp, layout: :horizontal) do |f| %>
       <%= f.alert_message 'Please fix the errors below.' %>
       <%= f.text_field :sku, placeholder: 'SKU', label: 'SKU', prompt: true %>
@@ -42,6 +42,24 @@
       <%= f.form_group :complete, label: { text: 'Data is good and ready to use' } do %>
           <%= f.check_box :complete, label: 'Check for Yes' %>
       <% end %>
-      <%= f.submit %>
+
+      <%= f.form_group :customizable, label: { text: 'Customizable?' } do %>
+          <%= f.check_box :customizable, label: 'Check for Yes' %>
+      <% end %>
+
+      <%= f.select :customizable_line_id, CustomizableLine.all.collect{|x| [x.sku, x.id] }, prompt: true %>
+
+      <h2>Customizations</h2>
+
+      <%= f.fields_for :customizations do |ff| %>
+        <%= render 'customization_fields', f: ff %>
+      <% end %>
+
+      <div id="add_customization_div">
+        <%= link_to_add_fields "Add Customization", f, :customizations %>
+      </div>
+      <br clear="all" />
+
+      <%= f.submit class: 'btn btn-success' %>
   <% end %>
 </div>

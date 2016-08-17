@@ -25,20 +25,36 @@ class Spreadsheet < ActiveRecord::Base
 
   def create_arps
     CSV.foreach(file.queued_for_write[:original].path, headers: true) do |row|
-      arps << Arp.find_or_create_by(sku: row['SKU'].strip, platen: row['PLATEN'].strip)
+      arp = Arp.find_or_create_by(sku: row['SKU'].strip, platen: row['PLATEN'].strip)
+      unless row['CUSTOMIZATIONS'].blank?
+        arp.update_attribute(:customizable, true)
+
+        if CustomizableLine.exists?(sku: arp.sku)
+          arp.update_attribute(:customizable_line, CustomizableLine.find_by(sku: arp.sku))
+        end
+
+        row['CUSTOMIZATIONS'].split("||").each do |x|
+          spree_variable = x.split("==")[0]
+          value = x.split("==")[1]
+          arp.customizations.find_or_create_by(spree_variable: spree_variable, value: value)
+        end
+
+      end
+      arps << arp
     end
   end
 
   def csv_download
-    columns = Arp.column_names
+    columns = Arp.column_names + ["CUSTOMIZATIONS"]
     columns.delete_if{ |col| %w(created_at updated_at complete spreadsheet_id id).include? col }
     CSV.generate do |csv|
       csv << columns.map{ |x| x.upcase }
       arps.each do |arp|
+        row = []
         if arp.complete?
-          csv << arp.attributes.values_at(*columns).map do |i|
-            i = format_value(i)
-          end
+          row = arp.attributes.values_at(*columns).map{ |i| format_value(i) }
+          row = row + [ arp.customizations.map{|x| "#{x.spree_variable}==#{x.value}"}.join("||") ]
+          csv << row
         end
       end
     end

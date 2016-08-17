@@ -1,0 +1,9 @@
+<div class="container">
+  <%= link_to new_customizable_line_path, class: 'btn btn-primary pull-right' do %>
+      <span class="glyphicon glyphicon-plus"></span> Add A Customizable Line
+  <% end %>
+
+  <h1 class="page-header">Edit Customizable Line <%= @customizable_line.sku %></h1>
+
+  <%= render 'form', customizable_line: @customizable_line %>
+</div>

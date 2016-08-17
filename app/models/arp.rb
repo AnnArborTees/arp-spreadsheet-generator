@@ -1,14 +1,26 @@
+require 'open-uri'
 require 'net/ftp'
 
 class Arp < ActiveRecord::Base
 
   PLATENS = %w(14x16 10x12 7x8 16x18)
   INKS = %w(cw C W)
+  PLATEN_MOCKBOT_CONVERSIONS = {
+    "14x16" => 1,
+    "10x12" => 2,
+    "7x8" => 3,
+    "16x18" => nil
+
+  }
+  PRINT_LOCATION_FRONT = 'Front'
+  LOCAL_ARTWORK_DIR = "#{Rails.root}/tmp"
 
   default_scope order(:sku)
 
   has_many :spreadsheets, through: :spreadsheet_arps
   has_many :spreadsheet_arps
+  has_many :customizations
+  belongs_to :customizable_line
 
   after_initialize :assign_static_values
   before_save :downcase_sku
@@ -16,6 +28,10 @@ class Arp < ActiveRecord::Base
   validates :sku, uniqueness: {scope: :platen}, presence: true
   validates :platen, presence: true
   validates :platen, inclusion: { in: PLATENS }
+  # validates :customizations, presence: :true, if: :customizable?
+  # validates :customizable_line, presence: :true, if: :customizable?
+
+  accepts_nested_attributes_for :customizations, :reject_if => lambda { |a| a[:spree_variable].blank? || a[:mockbot_variable].blank? || a[:value].blank? },  allow_destroy: true
 
   def find_mockbot_idea_for_arp
     idea = MockBot::Idea.find(self.sku)
@@ -142,7 +158,65 @@ class Arp < ActiveRecord::Base
     end
   end
 
+  def generate_custom_art_and_copy_locally
+    customized_artwork_params = {}
+    idea = find_mockbot_idea_for_arp
+    customized_artwork_params['idea_id'] = "#{idea.id}"
+    customized_artwork_params['print_location'] = PRINT_LOCATION_FRONT
+    customized_artwork_params['imprint_size_id'] = PLATEN_MOCKBOT_CONVERSIONS[platen]
+    customized_artwork_params['input_value'] = {}
+
+    customizations.each do |customization|
+      mb_customization = idea.customizations.find{|x| x.name == customization.mockbot_variable}.id
+      customized_artwork_params['input_value']["#{mb_customization}"] = customization.value
+    end
+
+    customized_artwork = MockBot::CustomizedArtwork.create(
+      customized_artwork: customized_artwork_params
+    )
+    self.update_attributes(
+      custom_artwork_url: customized_artwork.file_url,
+      customized_artwork_id: customized_artwork.id,
+      file_location: file_location.gsub(".png", "_#{customized_artwork.id}.png")
+    )
+
+    File::open(local_filename, "wb") do |saved_file|
+      open(custom_artwork_url, 'rb') do |read_file|
+        saved_file.write(read_file.read)
+      end
+    end
+  end
+
+  def copy_custom_art_to_server
+    # ftp the file to the ftp server
+    # ftp = Net::FTP::new(Figaro.env['ftp_host'])
+    # ftp.login(Figaro.env['ftp_username'], Figaro.env['ftp_password'])
+    # ftp.passive = Figaro.env['ftp_passive']
+    # file = self.file_location.gsub("\\AATC\\", '').gsub('\\', '/')
+    # begin
+    #   ftp.size(file)
+    # rescue Exception => e
+    #   puts e
+    #   return false
+    # end
+    # return true
+
+    # File.delete local_filename
+  end
+
+  def remove_custom_art_locally
+    # File.delete local_filename
+  end
+
+  def custom_artwork_generated?
+    !(custom_artwork_url.blank? || customized_artwork_id.blank?)
+  end
+
   private
+
+  def local_filename
+    "#{LOCAL_ARTWORK_DIR}/#{File.basename(URI.parse(custom_artwork_url).path)}"
+  end
 
   def downcase_sku
     self.sku = self.sku.downcase

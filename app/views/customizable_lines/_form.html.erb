@@ -1,0 +1,7 @@
+<%= bootstrap_form_for customizable_line do |f| %>
+    <%= f.text_field :sku %>
+    <%= f.text_field :spree_variable_name, help: 'This is what the variable name is in the retail admin' %>
+    <%= f.text_field :mockbot_variable_name, help: 'This is what the variable name is in mockbot' %>
+    <%= f.select :case_sensitive, true_false_options_for_select %>
+    <%= f.submit class: 'btn btn-success' %>
+<% end %>
