@@ -3,7 +3,7 @@ lock '3.2.1'
 
 set :application, 'arp-spreadsheet-generator'
 set :repo_url, 'git@github.com:annarbortees/softwear-arp.git'
-set :rvm_ruby_version, 'rbx-2.5.2'
+set :rvm_ruby_version, 'ruby-2.1.10'
 
 # Default branch is :master
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
