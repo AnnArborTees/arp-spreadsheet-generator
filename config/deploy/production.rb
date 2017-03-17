@@ -15,7 +15,7 @@
 # something that quacks like a hash can be used to set
 # extended properties on the server.
 # server 'arp.softwearcrm.com', user: 'ubuntu', roles: %w{web app}#, my_property: :my_value
-server '10.0.1.228', user: 'ubuntu', roles: %w{app web}
+server '10.0.0.242', user: 'ubuntu', roles: %w{app web db}
 
 set :branch, 'master'
 
